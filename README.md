@@ -92,10 +92,11 @@ VERSION:
 GLOBAL OPTIONS:
    --promAddr value    Bind address for Prometheus HTTP metrics server (default: ":9330") [$PROM_ADDR]
    --metrPath value    Path on which to expose Prometheus metrics (default: "/metrics") [$METRICS_PATH]
-   --ldapNet value     Network of OpenLDAP server (default: "tcp") [$LDAP_NET]
-   --ldapAddr value    Address of OpenLDAP server (default: "localhost:389") [$LDAP_ADDR]
+   --ldapAddr value    Address of OpenLDAP server (default "ldap://localhost:389") [$LDAP_ADDR]
    --ldapUser value    OpenLDAP bind username (optional) [$LDAP_USER]
    --ldapPass value    OpenLDAP bind password (optional) [$LDAP_PASS]
+   --ldapUseStartTLS   Use start TLS (optional)
+   --ldapCACrt string  Path to CA certificate for LDAPS (optional)
    --interval value    Scrape interval (default: 30s) [$INTERVAL]
    --webCfgFile FILE   Prometheus metrics web config FILE (optional) [$WEB_CFG_FILE]
    --jsonLog           Output logs in JSON format (default: false) [$JSON_LOG]
@@ -120,8 +121,10 @@ ldapPass: "sekret"
 
 NOTES:
 
-* `ldapNet` allows you to configure `tcp` or `unix` socket connections to your co-located OpenLDAP server.
 * `webCfgFile` can be used to provide authentication and TLS configuration for the [prometheus web exporter](https://github.com/prometheus/exporter-toolkit/tree/master/web).
+* `ldapAddr` supports `ldaps://`, `ldap://` and `ldapi://` scheme uri's. (defaults to ldap:// scheme)  
+using the LDAPS scheme will open a connection using TLS. To use StartTLS use ldap:// scheme and the command line flag `--ldapUseStartTLS`.
+* `ldapCACrt` if the ldap server uses a custom CA certificate, add the path to the public CA Cert in PEM format  
 
 ## Build
 
