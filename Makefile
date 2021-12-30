@@ -1,8 +1,8 @@
 GITCOMMIT := $(shell git rev-parse --short HEAD 2>/dev/null)
 GIT_TAG := $(shell git describe --tags 2>/dev/null)
 
-LDFLAGS := -X github.com/tomcz/openldap_exporter.commit=${GITCOMMIT}
-LDFLAGS := ${LDFLAGS} -X github.com/tomcz/openldap_exporter.tag=${GIT_TAG}
+LDFLAGS := -X github.com/mlorenzo-stratio/openldap_exporter.commit=${GITCOMMIT}
+LDFLAGS := ${LDFLAGS} -X github.com/mlorenzo-stratio/openldap_exporter.tag=${GIT_TAG}
 
 .PHONY: precommit
 precommit: clean format lint build
@@ -24,7 +24,7 @@ ifeq (, $(shell which goimports))
 	go get golang.org/x/tools/cmd/goimports
 endif
 	@echo "Running goimports ..."
-	@goimports -w -local github.com/tomcz/openldap_exporter $(shell find . -type f -name '*.go' | grep -v '/vendor/')
+	@goimports -w -local github.com/mlorenzo-stratio/openldap_exporter $(shell find . -type f -name '*.go' | grep -v '/vendor/')
 
 .PHONY: lint
 lint:
