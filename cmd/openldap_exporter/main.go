@@ -7,7 +7,7 @@ import (
 	"syscall"
 	"time"
 
-	exporter "github.com/mlorenzo-stratio/openldap_exporter"
+	exporter "github.com/braincube-io/openldap_exporter"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
